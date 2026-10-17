@@ -1,0 +1,46 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect myBKW",
+        "description": "1. Open [this login link]({login_url}) and log in to myBKW.\n2. You land on a page with a small arrow. Copy that page's full address from the address bar.\n3. Paste it below.",
+        "data": {
+          "address": "Address after login"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Log in to myBKW again",
+        "description": "The saved login has expired.\n\n1. Open [this login link]({login_url}) and log in to myBKW.\n2. You land on a page with a small arrow. Copy that page's full address from the address bar.\n3. Paste it below.",
+        "data": {
+          "address": "Address after login"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "The login was refused. Open the link again and paste the new address within a minute.",
+      "cannot_connect": "myBKW could not be reached."
+    },
+    "abort": {
+      "already_configured": "This metering point is already set up.",
+      "no_metering_points": "This myBKW account has no metering point.",
+      "reauth_successful": "Logged in again.",
+      "unique_id_mismatch": "This login belongs to a different metering point."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Electricity price",
+        "description": "Imported consumption is costed at this price per kWh. Choose a price sensor or enter a fixed price, not both. Hours are priced when they are imported, normally the next day; the history already imported gets the price that applies now. Fixed fees such as base tariffs and metering are spread evenly over the hours.",
+        "data": {
+          "price_entity": "Price sensor (per kWh)",
+          "price": "Fixed price (per kWh)",
+          "fixed_fee": "Fixed fees (per year)"
+        }
+      }
+    },
+    "error": {
+      "one_price": "Choose either a price sensor or a fixed price."
+    }
+  }
+}

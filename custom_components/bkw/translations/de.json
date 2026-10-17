@@ -1,0 +1,46 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "myBKW verbinden",
+        "description": "1. Öffne [diesen Login-Link]({login_url}) und melde dich bei myBKW an.\n2. Du landest auf einer Seite mit einem kleinen Pfeil. Kopiere die ganze Adresse dieser Seite aus der Adresszeile.\n3. Füge sie unten ein.",
+        "data": {
+          "address": "Adresse nach dem Login"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Erneut bei myBKW anmelden",
+        "description": "Die gespeicherte Anmeldung ist abgelaufen.\n\n1. Öffne [diesen Login-Link]({login_url}) und melde dich bei myBKW an.\n2. Du landest auf einer Seite mit einem kleinen Pfeil. Kopiere die ganze Adresse dieser Seite aus der Adresszeile.\n3. Füge sie unten ein.",
+        "data": {
+          "address": "Adresse nach dem Login"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Die Anmeldung wurde abgelehnt. Öffne den Link erneut und füge die neue Adresse innert einer Minute ein.",
+      "cannot_connect": "myBKW ist nicht erreichbar."
+    },
+    "abort": {
+      "already_configured": "Dieser Messpunkt ist bereits eingerichtet.",
+      "no_metering_points": "Dieses myBKW-Konto hat keinen Messpunkt.",
+      "reauth_successful": "Erneut angemeldet.",
+      "unique_id_mismatch": "Diese Anmeldung gehört zu einem anderen Messpunkt."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Strompreis",
+        "description": "Der importierte Verbrauch wird zu diesem Preis pro kWh bewertet. Wähle einen Preis-Sensor oder gib einen festen Preis ein, nicht beides. Stunden werden beim Import bewertet, normalerweise am Folgetag; die bereits importierte Vergangenheit erhält den aktuell gültigen Preis. Feste Gebühren wie Grundtarife und Messung werden gleichmässig auf die Stunden verteilt.",
+        "data": {
+          "price_entity": "Preis-Sensor (pro kWh)",
+          "price": "Fester Preis (pro kWh)",
+          "fixed_fee": "Feste Gebühren (pro Jahr)"
+        }
+      }
+    },
+    "error": {
+      "one_price": "Wähle entweder einen Preis-Sensor oder einen festen Preis."
+    }
+  }
+}
