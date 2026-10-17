@@ -4,6 +4,7 @@
 [![Home Assistant](https://img.shields.io/badge/Home%20Assistant-2026.10%2B-18BCF2.svg?logo=homeassistant&logoColor=white)](https://www.home-assistant.io/)
 [![Version](https://img.shields.io/badge/version-0.3.0-blue.svg)](custom_components/bkw/manifest.json)
 [![IoT class](https://img.shields.io/badge/IoT%20class-cloud%20polling-lightgrey.svg)](https://developers.home-assistant.io/docs/creating_integration_manifest/#iot-class)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 Imports the consumption of a BKW smart meter from [myBKW](https://my.bkw.ch) into
 Home Assistant's long-term statistics, together with its cost, for the Energy
