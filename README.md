@@ -2,7 +2,7 @@
 
 [![HACS Custom](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://hacs.xyz/docs/faq/custom_repositories/)
 [![Home Assistant](https://img.shields.io/badge/Home%20Assistant-2026.10%2B-18BCF2.svg?logo=homeassistant&logoColor=white)](https://www.home-assistant.io/)
-[![Version](https://img.shields.io/badge/version-0.3.0-blue.svg)](custom_components/bkw/manifest.json)
+[![Release](https://img.shields.io/github/v/release/mbolli/ha-bkw)](https://github.com/mbolli/ha-bkw/releases/latest)
 [![IoT class](https://img.shields.io/badge/IoT%20class-cloud%20polling-lightgrey.svg)](https://developers.home-assistant.io/docs/creating_integration_manifest/#iot-class)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
