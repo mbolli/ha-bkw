@@ -18,6 +18,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: BkwConfigEntry) -> bool:
     api = BkwApi(async_get_clientsession(hass), entry.data[CONF_REFRESH_TOKEN])
     coordinator = BkwCoordinator(hass, entry, api)
     await coordinator.async_config_entry_first_refresh()
+    # The coordinator only polls while something listens, and this integration
+    # has no entities to do that.
+    entry.async_on_unload(coordinator.async_add_listener(lambda: None))
     entry.runtime_data = coordinator
     return True
 
