@@ -32,6 +32,10 @@ _LOGGER = logging.getLogger(__name__)
 
 CHUNK = timedelta(days=30)
 HOUR = timedelta(hours=1)
+# BKW publishes a day's readings some time the next day: poll hourly until
+# yesterday is complete, then fall back to a slow interval.
+CAUGHT_UP_INTERVAL = timedelta(hours=6)
+WAITING_INTERVAL = timedelta(hours=1)
 
 
 class BkwCoordinator(DataUpdateCoordinator[None]):
@@ -45,8 +49,7 @@ class BkwCoordinator(DataUpdateCoordinator[None]):
             _LOGGER,
             config_entry=entry,
             name=DOMAIN,
-            # BKW publishes a day's readings some time the next day.
-            update_interval=timedelta(hours=6),
+            update_interval=WAITING_INTERVAL,
         )
         self.api = api
 
@@ -58,8 +61,8 @@ class BkwCoordinator(DataUpdateCoordinator[None]):
                 self.config_entry,
                 data={**self.config_entry.data, CONF_REFRESH_TOKEN: self.api.refresh_token},
             )
-            for point in await self.api.async_metering_points():
-                await self._import(point)
+            caught_up = [await self._import(point) for point in await self.api.async_metering_points()]
+            self.update_interval = CAUGHT_UP_INTERVAL if all(caught_up) else WAITING_INTERVAL
         except BkwAuthError as err:
             raise ConfigEntryAuthFailed(str(err)) from err
         except BkwApiError as err:
@@ -77,7 +80,8 @@ class BkwCoordinator(DataUpdateCoordinator[None]):
         price = options.get(CONF_PRICE)
         return float(price) if price is not None else None
 
-    async def _import(self, point: dict[str, Any]) -> None:
+    async def _import(self, point: dict[str, Any]) -> bool:
+        """Import new hours for one metering point; return True once yesterday is complete."""
         code = point["meteringPointCode"]
         first = dt_util.as_utc(datetime.fromisoformat(point["dataAvailableFrom"]))
         consumption = await _Series.load(
@@ -135,6 +139,7 @@ class BkwCoordinator(DataUpdateCoordinator[None]):
 
         for s in series:
             s.save(self.hass)
+        return consumption.next_hour >= end
 
 
 class _Series:
@@ -163,6 +168,7 @@ class _Series:
         if hour >= self.next_hour:
             self.total += value
             self.rows.append(StatisticData(start=hour, state=value, sum=self.total))
+            self.next_hour = hour + HOUR
 
     def save(self, hass: HomeAssistant) -> None:
         if self.rows:
